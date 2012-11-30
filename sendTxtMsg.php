@@ -1,12 +1,16 @@
 <?php
 
-require('twilio-php/Services/Twilio.php');
+require('telsolutions-php/textportalv2.php');
 
-/* Start Configs */
+// Settings
+$username   = 'YOURUSERNAME';
+$secret     = 'YOURSECRET';
+        
+// Sender ID for messages (Maximum 11 characters alpha-numeric only)
+$senderId	=	'YOURSENDER';
 
-$sid = "A123.....";
-$token = "29d6b9f.......";
-$twilio_number = '4045550101';
+// Connect to API over HTTPS? (Set to False if php_openssl isn't present)
+$ssl = true;
 
 /* End Configs */
 
@@ -16,15 +20,12 @@ $msg    = $argv[2];
 $msg    = str_replace('\n', "\n", $msg);
 
 
-$client = new Services_Twilio($sid, $token);
-try 
+$client = new TextPortal($username, $secret, $senderId, $ssl);
+
+$return = $client->send($phone, $msg);
+
+if($return!=="05")
 {
-    $message = $client->account->sms_messages->create(
-        $twilio_number, // From a valid Twilio number
-        $phone, // Text this number
-        $msg
-    );    
-} catch (Exception $ex)
-{
-    var_dump($ex);
+	echo "Error Sending SMS:\n";
+	var_dump($return);
 }

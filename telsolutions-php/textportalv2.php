@@ -50,17 +50,6 @@ class TextPortal {
         return $this->post($data);		
         
     }
-        
-        
-    // Obtain the latest statuses for messages sent via one-2-many option
-    // Requires the id returned when the one-2-many messages were sent
-    public function poll($id) {
-        
-        $data = "username=".$this->username."&secret=".$this->secret."&poll=".intval($id);
-            
-        return $this->post($data);		
-        
-    }
 
 
     // Post function
@@ -106,60 +95,3 @@ class TextPortal {
 
 
 }
-
-
-/*
-
-// ================================ ONE 2 ONE Execution example
-
-// Load class
-$textportal = new textportal();
-
-// Get phone number to send to
-$number = "00447810511611";
-
-// Create message
-$message = "This is an example message - please visit mobile.website.com";
-
-// Send the message
-$result = $textportal->send($number, $message);
-
-// Debug result
-print $result;
-
-
-
-// ================================ ONE 2 MANY Execution example
-
-// Load class
-$textportal = new textportal();
-
-// Get phone number to send to
-$number = "00447810511655,00447538601566";
-
-// Create message
-$message = "This is an example message - please visit mobile.website.com";
-
-// Send the message
-$result = $textportal->send($number, $message, true);
-
-// Debug result
-print $result;
-
-
-
-// ================================ ONE 2 MANY Poll example
-
-// Load class
-$textportal = new textportal();
-
-// What is the message ID we are polling?
-$pollId = 2430;
-
-// Send the message
-$result = $textportal->poll($pollId);
-
-// Debug result
-print $result;
-
-*/
